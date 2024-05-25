@@ -3,7 +3,6 @@
 #include <Geode/modify/MenuLayer.hpp>
 #include <chrono>
 #include <thread>
-#include "sol.hpp"
 #include "publicvars/vars.h"
 using namespace geode::prelude;
 void logMessage(const std::string& message) {
@@ -18,6 +17,27 @@ void info(std::string message) {
 cocos2d::CCNode* getcurrentlayer() {
     return layer;
 }
+bool Alert(const char* name = "Alert", const char* dec = "Put something here", const char* button1 = "No", const char* button2 = "Yes",  sol::protected_function function1 = nullptr, sol::protected_function function2 = nullptr) {
+    auto popup = geode::createQuickPopup(
+        name,
+        dec,
+        button1, button2,
+      [function1, function2](auto, bool btn2) {
+        if (btn2) {
+                sol::protected_function_result result = function1(btn2);
+        } else {
+                sol::protected_function_result result = function2(btn2);
+        }
+}, false
+    );
+    if (!popup) {
+        return false;
+    }
+    popup->m_scene = layer;
+    popup->show();
+    return true;
+}
+
 std::string getid(CCNode* c) {
     if (!c) {
         return nullptr;

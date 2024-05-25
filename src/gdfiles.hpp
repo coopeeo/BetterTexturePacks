@@ -49,6 +49,7 @@ void runLua(const std::string& scriptpath, auto py) {
     geodetable["ThisLayer"] = &getcurrentlayer;
     geodetable["GetID"] = &getid;
     geodetable["SetID"] =  &setid;
+    geodetable["Alert"] = &Alert;
     try {
         lua.script_file(scriptpath);
     } catch (const sol::error& e) {
