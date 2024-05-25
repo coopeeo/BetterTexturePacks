@@ -14,8 +14,6 @@ include_directories(inc)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
 
-include_directories(${LUA_INCLUDE_DIR})
-
 if (NOT DEFINED ENV{GEODE_SDK})
     message(FATAL_ERROR "Unable to find Geode SDK! Please define GEODE_SDK environment variable to point to Geode")
 else()
