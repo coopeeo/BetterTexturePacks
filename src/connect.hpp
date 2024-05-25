@@ -10,7 +10,7 @@ void logMessage(const std::string& message) {
     std::cout << "Lua says: " << message << std::endl;
 }
 void debug(std::string message) {
-    log::debug("{}",message);
+    //log::debug("{}",message);
 }
 void info(std::string message) {
     log::info("{}",message );

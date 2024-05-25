@@ -17,7 +17,7 @@ void senderror(bool a,auto firstarg,auto secondarg, auto error, std::string path
          geode::log::error("Unknown exception occurred");
     } else {
         geode::log::error("{}({}) error {} \n path is {}",firstarg,secondarg,error,path);
-        const char*  dec  =  fmt::format("{} \nCaused By Texture Pack \n{}({})\nWould you like to open the script",error,firstarg,secondarg).c_str();
+        const char*  dec  = fmt::format("{} \nCaused By Texture Pack \n{}({})\nWould you like to open the script",error,firstarg,secondarg).c_str();
        auto popup= geode::createQuickPopup(
         "[Texture pack manager]",
         dec,
