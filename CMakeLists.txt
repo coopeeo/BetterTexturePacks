@@ -21,7 +21,6 @@ else()
 endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
-set(CMAKE_GENERATOR_TOOLSET "v142") # The default toolset for VS2019 is v142
 
 setup_geode_mod(${PROJECT_NAME})
 
