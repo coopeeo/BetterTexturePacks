@@ -24,7 +24,7 @@ std::string getid(CCNode* c) {
     };
     return c->getID();
 }
-CCNode* setid(sol::table self, const std::string& name) {
+CCNode* setid(CCNode* self, const std::string& name) {
     if (!self) {
         return nullptr;
     };
