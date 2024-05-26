@@ -37,7 +37,7 @@ bool Alert(const char* name, const char* dec, const char* button1, const char* b
         name,
         dec,
         button1, button2,
-        [func1,func2](auto, bool btn2) {
+        [&](auto, bool btn2) {
             if (btn2) {
                 (*func2)();
             } else {

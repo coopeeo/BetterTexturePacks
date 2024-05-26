@@ -1,6 +1,11 @@
 {
-	"geode": "2.0.0-beta.26",
-	"gd": "2.204",
+	"geode": "2.0.0-beta.27",
+	"gd": {
+		"win": "2.204",
+		"android": "2.205",
+		"mac": "2.200",
+		"ios": "2.205"
+	},
 	"version": "v1.0.0",
 	"id": "viper.luafilestexturepack",
 	"name": "Texture pack Lua",

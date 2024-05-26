@@ -15,14 +15,18 @@ jobs:
         - name: Windows
           os: windows-latest
 
-        #- name: macOS
-         # os: macos-latest prob never work
+        - name: macOS
+          os: macos-latest
 
-        #- name: Android32
-        #  os: ubuntu-latest gotta make a work around prob
-        #  target: Android32
+        - name: iOS
+          os: macos-latest
+          target: iOS
 
-        - name: Android64
+        - name: Android 32-bit
+          os: ubuntu-latest
+          target: Android32
+
+        - name: Android 64-bit
           os: ubuntu-latest
           target: Android64
 
@@ -33,7 +37,8 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Build the mod
-        uses: geode-sdk/build-geode-mod@main
+        #uses: geode-sdk/build-geode-mod@main
+        uses: RoootTheFox/build-geode-mod@main
         with:
           bindings: geode-sdk/bindings
           bindings-ref: main
@@ -46,7 +51,8 @@ jobs:
     needs: ['build']
 
     steps:
-      - uses: geode-sdk/build-geode-mod/combine@main
+      #- uses: geode-sdk/build-geode-mod/combine@main
+      - uses: RoootTheFox/build-geode-mod/combine@main
         id: build
 
       - uses: actions/upload-artifact@v4
