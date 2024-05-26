@@ -17,10 +17,11 @@ void info(std::string message) {
 cocos2d::CCNode* getcurrentlayer() {
     return layer;
 }
-bool Alert(const char* name, const char* dec, const char* button1, const char* button2 ,  sol::protected_function function1, sol::protected_function function2 ) {
+
+bool Alert(const char* name, const char* dec, const char* button1, const char* button2, sol::function function1, sol::function function2) {
     if (!name) {
         name = "Alert";
-    } 
+    }
     if (!dec) {
         dec = "Put something here";
     }
@@ -30,25 +31,31 @@ bool Alert(const char* name, const char* dec, const char* button1, const char* b
     if (!button2) {
         button2 = "Yes";
     }
+    auto func1 = std::make_shared<sol::function>(function1);
+    auto func2 = std::make_shared<sol::function>(function2);
     auto popup = geode::createQuickPopup(
         name,
         dec,
         button1, button2,
-      [function1, function2](auto, bool btn2) {
-        if (btn2) {
-                sol::protected_function_result result = function1();
-        } else {
-                sol::protected_function_result result = function2();
-        }
-}, false
+        [func1,func2](auto, bool btn2) {
+            if (btn2) {
+                (*func2)();
+            } else {
+                (*func1)();
+            }
+        },
+        false
     );
+
     if (!popup) {
         return false;
     }
+
     popup->m_scene = layer;
     popup->show();
     return true;
 }
+
 
 std::string getid(CCNode* c) {
     if (!c) {
