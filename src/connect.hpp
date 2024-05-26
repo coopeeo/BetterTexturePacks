@@ -17,16 +17,28 @@ void info(std::string message) {
 cocos2d::CCNode* getcurrentlayer() {
     return layer;
 }
-bool Alert(const char* name = "Alert", const char* dec = "Put something here", const char* button1 = "No", const char* button2 = "Yes",  sol::protected_function function1 = nullptr, sol::protected_function function2 = nullptr) {
+bool Alert(const char* name, const char* dec, const char* button1, const char* button2 ,  sol::protected_function function1, sol::protected_function function2 ) {
+    if (!name) {
+        name = "Alert";
+    } 
+    if (!dec) {
+        dec = "Put something here";
+    }
+    if (!button1) {
+        button1 = "No";
+    }
+    if (!button2) {
+        button2 = "Yes";
+    }
     auto popup = geode::createQuickPopup(
         name,
         dec,
         button1, button2,
       [function1, function2](auto, bool btn2) {
         if (btn2) {
-                sol::protected_function_result result = function1(btn2);
+                sol::protected_function_result result = function1();
         } else {
-                sol::protected_function_result result = function2(btn2);
+                sol::protected_function_result result = function2();
         }
 }, false
     );
@@ -69,6 +81,7 @@ void newthread(sol::function fun) {
     
     // Create a coroutine from the function
     sol::coroutine f = runner_fun;
+    
     
     // Execute the coroutine
     f();

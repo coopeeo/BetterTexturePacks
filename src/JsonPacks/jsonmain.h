@@ -2,6 +2,7 @@
 #include <Geode/Geode.hpp>
 #include <matjson.hpp>
 #include <Geode/utils/file.hpp>
+#include "imagenthisfixesit.hpp"
 using namespace geode::prelude;
  std::pair<std::string, std::string> JsonManager(auto paths) {
     auto gdpath = ghc::filesystem::path(paths) / "packinfo" / "pack.json";
