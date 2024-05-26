@@ -15,12 +15,12 @@ jobs:
         - name: Windows
           os: windows-latest
 
-        - name: macOS
-          os: macos-latest
+        #- name: macOS
+         # os: macos-latest prob never work
 
-        - name: Android32
-          os: ubuntu-latest
-          target: Android32
+        #- name: Android32
+        #  os: ubuntu-latest gotta make a work around prob
+        #  target: Android32
 
         - name: Android64
           os: ubuntu-latest
