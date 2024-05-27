@@ -66,13 +66,14 @@ void getTextureLoaderResources(const std::string& a) {
    std::vector<std::string> packPathsval;
     gd::vector<gd::string> paths = CCFileUtils::sharedFileUtils()->getSearchPaths();
     if(textureLoader){
-         ghc::filesystem::path textureLoaderPacks = textureLoader->getConfigDir();
-         std::string packDirStr = fmt::format("{}{}", textureLoaderPacks, "\\packs");
-        for(std::string path : paths){
+        ghc::filesystem::path textureLoaderPacks = textureLoader->getConfigDir();
+        std::string packDirStr = fmt::format("{}{}", textureLoaderPacks, "\\packs");
+
+        for (std::string path : paths){
 
             ghc::filesystem::path fpath = ghc::filesystem::path(path);
             ghc::filesystem::path pathParent = ghc::filesystem::path(path);
-             ghc::filesystem::path packDir = ghc::filesystem::path(packDirStr);
+            ghc::filesystem::path packDir = ghc::filesystem::path(packDirStr);
             while(pathParent.has_parent_path()){
 
                 if(pathParent == packDir){
@@ -91,7 +92,7 @@ void getTextureLoaderResources(const std::string& a) {
         // yes this fixes dupes
         for(std::string gennew : packPaths){
             ghc::filesystem::path fpath = ghc::filesystem::path(gennew);
-            if (ghc::filesystem::exists(fpath)) {
+            if (ghc::filesystem::exists(fpath / a)) {
                 for (const auto& entry : ghc::filesystem::directory_iterator(fpath / a)) {
                     if (ghc::filesystem::is_regular_file(entry)) {
                     try {

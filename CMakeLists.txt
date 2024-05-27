@@ -18,6 +18,16 @@ add_library(${PROJECT_NAME} SHARED
 src/main.cpp
 )
 
+#include(FetchContent)
+#FetchContent_Declare(
+#    sol
+#    GIT_REPOSITORY https://github.com/ThePhD/sol2.git
+#    GIT_TAG eba8662
+#)
+#FetchContent_MakeAvailable(sol)
+
+#include_directories(${CMAKE_SOURCE_DIR}/path/to/sol2/include)
+
 include_directories(inc)
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE CURRENT_SOURCE_DIR="${CMAKE_CURRENT_SOURCE_DIR}")
@@ -35,12 +45,8 @@ setup_geode_mod(${PROJECT_NAME})
 set(LUA_ENABLE_SHARED ON)
 set(LUA_ENABLE_TESTING ON)
 
-CPMAddPackage("gh:walterschell/Lua#88246d6")
+set(LUA_VERSION "lua-5.3.5")
 
-if (WIN32 AND CMAKE_CXX_COMPILER_ID STREQUAL "Clang" AND CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "GNU")
-    target_compile_options(lua_static PRIVATE --target=i686-pc-windows-msvc)
-    target_link_options(lua_static PRIVATE --target=i686-pc-windows-msvc)
-endif()
+CPMAddPackage("gh:coopeeo/lua-cmake-fork#master")
 
-target_link_libraries(${PROJECT_NAME} lua_static)
-
+target_link_libraries(${PROJECT_NAME} lua::lib)

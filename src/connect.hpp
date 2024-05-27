@@ -4,6 +4,7 @@
 #include <chrono>
 #include <thread>
 #include "publicvars/vars.h"
+#include "luafixes/geodequickpopup.hpp"
 using namespace geode::prelude;
 void logMessage(const std::string& message) {
     std::cout << "Lua says: " << message << std::endl;
@@ -18,6 +19,8 @@ cocos2d::CCNode* getcurrentlayer() {
     return layer;
 }
 
+
+
 bool Alert(const char* name, const char* dec, const char* button1, const char* button2, sol::function function1, sol::function function2) {
     if (!name) {
         name = "Alert";
@@ -31,20 +34,13 @@ bool Alert(const char* name, const char* dec, const char* button1, const char* b
     if (!button2) {
         button2 = "Yes";
     }
-    auto func1 = std::make_shared<sol::function>(function1);
-    auto func2 = std::make_shared<sol::function>(function2);
-    auto popup = geode::createQuickPopup(
+
+    auto popup = GeodeQuickPopup::create(
         name,
         dec,
         button1, button2,
-        [&](auto, bool btn2) {
-            if (btn2) {
-                (*func2)();
-            } else {
-                (*func1)();
-            }
-        },
-        false
+        function1, function2,
+        350.f
     );
 
     if (!popup) {
