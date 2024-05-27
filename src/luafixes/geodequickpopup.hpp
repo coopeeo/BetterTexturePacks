@@ -25,9 +25,33 @@ protected:
             return;
         }
         if (btn2 && m_selected2) {
-            m_selected2();
+            #ifndef GEODE_IS_ANDROID
+            try {
+                if (m_selected2.valid()) {
+                    m_selected2();
+                }
+            } catch (const sol::error& e) {
+                geode::log::error("Lua error in right button callback: {}", e.what());
+            }
+            #else
+            if (m_selected2.valid()) {
+                m_selected2();
+            }
+            #endif
         } else if (!btn2 && m_selected) {
-            m_selected();
+            #ifndef GEODE_IS_ANDROID
+            try {
+                if (m_selected.valid()) {
+                    m_selected();
+                }
+            } catch (const sol::error& e) {
+                geode::log::error("Lua error in left button callback: {}", e.what());
+            }
+            #else
+            if (m_selected.valid()) {
+                m_selected();
+            }
+            #endif
         }
     }
 

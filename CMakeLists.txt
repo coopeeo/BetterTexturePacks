@@ -40,13 +40,11 @@ endif()
 
 add_subdirectory($ENV{GEODE_SDK} ${CMAKE_CURRENT_BINARY_DIR}/geode)
 
-setup_geode_mod(${PROJECT_NAME})
-
 set(LUA_ENABLE_SHARED ON)
 set(LUA_ENABLE_TESTING ON)
+set(LUA_VERSION "5.4")
 
-set(LUA_VERSION "lua-5.3.5")
-
-CPMAddPackage("gh:coopeeo/lua-cmake-fork#master")
-
+CPMAddPackage("gh:coopeeo/lua-cmake-fork#sol-compatible")
 target_link_libraries(${PROJECT_NAME} lua::lib)
+
+setup_geode_mod(${PROJECT_NAME})
